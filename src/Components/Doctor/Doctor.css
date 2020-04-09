@@ -1,0 +1,86 @@
+.doctorPages{
+    display: flex;
+}
+.sidebarMenu{
+    width: 20%;
+    min-height: 100vh;
+    padding: 50px 20px;
+    display: inline-block;
+    background: linear-gradient(to top, #11D0E0,#19D3B0);
+}
+.doctorLink{
+    display: flex;
+    color: #ffffff;
+    padding: 20px 0px;
+}
+.doctorLink svg{
+    margin-right: 10px;
+}
+.sidebarMenu{
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+}
+.sidebarMenu ul li{
+    list-style: none;
+}
+.sidebarMenu ul li a{
+    text-decoration: none;
+    font-size: 18px;
+    color: #ffffff;
+}
+.doctorComponents{
+    padding: 20px;
+    min-width: 1000px;
+}
+.MuiTableContainer-root {
+    width: 153%;
+}
+.logout li{
+    list-style: none;
+ }
+.logout a{
+   text-decoration: none;
+    color: #fff;
+    padding-left: 15px;
+}
+/* Dasboard */
+.appointmentSummary{
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    grid-gap: 30px;
+    margin: 50px 0;
+}
+.appointmentSummary > div{
+    color: #fff;
+    border-radius: 8px;
+    padding: 0px 15px;
+    display: flex;
+    align-items: center;
+}
+.appointmentSummary .pendingAppoint{
+    background-color: #F1536E;
+}
+.appointmentSummary .todaysAppoint{
+    background-color: #3DA5F4;
+}
+.appointmentSummary .totalAppoint{
+    background-color: #00C689;
+}
+.appointmentSummary .totalPatients{
+    background-color: #FDA006;
+}
+
+.appointmentSummary h2{
+    font-size: 45px;
+    font-weight: 500;
+    margin-right: 20px;
+}
+
+.notAdded{
+    font-weight: bold;
+    cursor: pointer;
+}
+.colorPrimary{
+    color:#11D0E0;
+}

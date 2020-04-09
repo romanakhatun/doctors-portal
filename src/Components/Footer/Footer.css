@@ -1,0 +1,27 @@
+.mainFooter{
+    background: linear-gradient(to right,#19D3B0, #11D0E0);
+}
+.footer{
+    display: flex;
+    margin-top: 50px;
+    padding: 30px;
+    justify-content: space-between;
+}
+.fristListF{
+    margin-top: 70px;
+}
+.footer ul li{
+    list-style: none;
+    margin-right: 30px;
+    color: #ffffff;
+    font-size: 18px;
+}
+.footer h2{
+    color: #ffffff; 
+   margin-left: 30px;
+}
+.footerP{
+    text-align: center;
+    padding: 10px 0px;
+    color: #ffffff;
+}
