@@ -1,17 +1,15 @@
 import React, { useState } from 'react';
-import Calendar from 'react-calendar';
+import Calender from './Calender';
 import './Appointment.css'
-import 'react-calendar/dist/Calendar.css';
 import maskGroup1 from '../../Components/images/MaskGroup1.png';
 
 const Appointment = () => {
-    // Calender
-    const [selectedDate, setSelectedDate] = useState(new Date());
-    const handleDateChange = date => {
-        setSelectedDate(date);
-    };
-    console.log(selectedDate);
 
+    const [date, setDate] = useState();
+    const dateHandler = (date) => {
+        setDate(date);
+    }
+    console.log(date);
     // Appointments
     const services = [
         { id: "TO1", target: "#TO1", name: "Teeth Orthodontics", time: "8.00 AM", available: 10 },
@@ -29,10 +27,9 @@ const Appointment = () => {
                     <div className="leftSection">
                         <h2>Appointment</h2>
                         <div style={{ marginTop: "80px" }}>
-                            <Calendar onChange={handleDateChange} value={selectedDate} />
+                            <Calender dateHandler={dateHandler}></Calender>
                         </div>
                     </div>
-
                     <div className="rightSection">
                         <img src={maskGroup1} alt="" />
                     </div>
@@ -41,16 +38,15 @@ const Appointment = () => {
 
             <section className="appointments">
                 <h2>Available Appointments</h2>
-
                 <div className="appointmentsServices">
-                    {services.map(ser => <AppointmentsServices service={ser} selectedDate={selectedDate}></AppointmentsServices>)}
+                    {services.map(ser => <AppointmentsServices service={ser} date={date}></AppointmentsServices>)}
                 </div>
             </section>
         </div>
     );
 };
-
 export default Appointment;
+
 
 function AppointmentsServices(props) {
     const { id, target, name, time, available } = props.service;
@@ -68,7 +64,7 @@ function AppointmentsServices(props) {
         const appointment = { name, gender, age, weight, phone, email, time, date }
 
         // post
-        fetch('https://ro-doctors-portal.herokuapp.com/addProduct', {
+        fetch('https://ro-doctors-portal.herokuapp.com/addAppointment', {
             method: 'POST',
             body: JSON.stringify(appointment),
             headers: {
@@ -139,26 +135,17 @@ function AppointmentsServices(props) {
                                 <option value="7.00 PM">7.00 PM</option>
                                 <option value="8.00 PM">8.00 PM</option>
                             </select>
-                            <input type="text" className="input" id={id + "date"} placeholder="Date" value={props.selectedDate} /><br />
-                        </div><br />
 
-                        <button className="btn" id={id + "send"} onClick={btnAddAppointment}>Send</button>
+                            <input type="text" className="input" id={id + "date"} placeholder="Date" value={props.date} /><br />
+
+                        </div>
+
+                        {!props.date ? <p style={{ color: "red" }}>Please Select upcomming day</p> : <button style={{ marginBottom: "20px" }} className="btn" id={id + "send"} onClick={btnAddAppointment}>Send</button>}<br />
+
                     </div>
-
                     <p id="successMsg" style={{ color: "green", display: "none", marginTop: "10px" }}> Appointment added successfully</p>
                 </div>
             </div>
         </div>
     );
 }
-
-
-
-
-
-
-
-
-
-
-

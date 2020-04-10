@@ -11,7 +11,7 @@ import Paper from '@material-ui/core/Paper';
 const Patients = () => {
     const [appointments, setAppointments] = useState([]);
     useEffect(() => {
-        fetch('https://ro-doctors-portal.herokuapp.com/products').then(res => res.json()).then(data => {
+        fetch('https://ro-doctors-portal.herokuapp.com/appointments').then(res => res.json()).then(data => {
             setAppointments(data);
         });
     }, []);
@@ -51,7 +51,7 @@ const Patients = () => {
                                 <TableCell>{appointment.name}</TableCell>
                                 <TableCell>{appointment.gender}</TableCell>
                                 <TableCell align="center">{appointment.age}</TableCell>
-                                <TableCell align="center">{appointment.weight}</TableCell>
+                                <TableCell align="center">{appointment.weight} kg</TableCell>
                                 <TableCell align="center">{appointment.phone}</TableCell>
                                 <TableCell><p style={{ maxWidth: "240px" }}>{appointment.date}</p></TableCell>
                             </TableRow>

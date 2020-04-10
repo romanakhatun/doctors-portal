@@ -84,3 +84,28 @@
 .colorPrimary{
     color:#11D0E0;
 }
+/*Appointment*/
+.appointment{
+    display: flex;
+    margin-top: 35px;
+    justify-content: space-between;
+
+}
+.appointmentData{
+    width: 80%;
+    margin-left: 33px;
+}
+.bgGreen{
+    background: #38AF86;
+}
+.bgInfo{
+    background: #77C6FF; 
+}
+.bgRed{
+    background: #FF7676;  
+}
+/* viewPrescription */
+.addPrescriptionForm textarea{
+    min-width: 70vh;
+    min-height: 45vh;
+}

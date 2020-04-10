@@ -7,14 +7,22 @@ import TableContainer from '@material-ui/core/TableContainer';
 import TableHead from '@material-ui/core/TableHead';
 import TableRow from '@material-ui/core/TableRow';
 import Paper from '@material-ui/core/Paper';
+import AddPrescription from './AddPrescription'
+import ViewPrescription from './ViewPrescription'
+import StatusUpdate from './StatusUpdate'
 
 const Dashboard = () => {
     const [appointments, setAppointments] = useState([]);
     useEffect(() => {
-        fetch('https://ro-doctors-portal.herokuapp.com/products').then(res => res.json()).then(data => {
+        fetch('https://ro-doctors-portal.herokuapp.com/appointments').then(res => res.json()).then(data => {
             setAppointments(data);
         });
     }, []);
+
+    const d = new Date();
+    const formatDate = `${d.getFullYear()}-${("0" + (d.getMonth() + 1)).slice(-2)} -${d.getDate()}`;
+    const todayAppointments = appointments.filter(appoint => appoint.date === formatDate);
+    const pendingAppointments = appointments.filter(appoint => appoint.status === 'pending');
 
     const useStyles = makeStyles({
         table: {
@@ -23,7 +31,6 @@ const Dashboard = () => {
     });
 
     let count = 1;
-
     const classes = useStyles();
 
     return (
@@ -32,19 +39,19 @@ const Dashboard = () => {
 
             <div className="appointmentSummary">
                 <div className="pendingAppoint">
-                    <h2>09</h2>
+                    <h2>{pendingAppointments.length}</h2>
                     <p>Pending Appointments</p>
                 </div>
                 <div className="todaysAppoint">
-                    <h2>19</h2>
+                    <h2>{todayAppointments.length}</h2>
                     <p>Todays Appointments</p>
                 </div>
                 <div className="totalAppoint">
-                    <h2>34</h2>
+                    <h2>{appointments.length}</h2>
                     <p>Total Appointments</p>
                 </div>
                 <div className="totalPatients">
-                    <h2>78</h2>
+                    <h2>{appointments.length}</h2>
                     <p>Total Patients</p>
                 </div>
             </div>
@@ -71,8 +78,16 @@ const Dashboard = () => {
                                 <TableCell>{appointment.time}</TableCell>
                                 <TableCell>{appointment.name}</TableCell>
                                 <TableCell align="center">{appointment.phone}</TableCell>
-                                <TableCell align="center"><button className='btn'>{appointment.prescription}</button></TableCell>
-                                <TableCell align="center"><button className='btn'>{appointment.action}</button></TableCell>
+                                {
+                                    appointment.prescription ? <TableCell align="center"><a href={"#view" + appointment._id} className='btn'>View</a></TableCell> : <TableCell align="center"><a href={"#add" + appointment._id} className="notAdded" title="Add prescription">Not Added</a></TableCell>
+                                }
+                                <TableCell align="center">{
+                                    appointment.status === 'cancelled' ? <a href={"#status" + appointment._id} className='btn bgRed'>Cancelled</a> : appointment.status === 'approved' ? <a href={"#status" + appointment._id} className='btn bgGreen'>Approved</a> : <a href={"#status" + appointment._id} className='btn bgInfo'>Pending</a>
+                                }</TableCell>
+
+                                <AddPrescription id={"add" + appointment._id} appointment={appointment}></AddPrescription>
+                                <ViewPrescription id={"view" + appointment._id} appointment={appointment}></ViewPrescription>
+                                <StatusUpdate id={"status" + appointment._id} appointment={appointment}></StatusUpdate>
                             </TableRow>
                             )
                         }

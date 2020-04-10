@@ -1,5 +1,4 @@
-import React from 'react';
-import './Doctor.css'
+import React, { useState, useEffect } from 'react';
 import { makeStyles } from '@material-ui/core/styles';
 import Table from '@material-ui/core/Table';
 import TableBody from '@material-ui/core/TableBody';
@@ -8,55 +7,62 @@ import TableContainer from '@material-ui/core/TableContainer';
 import TableHead from '@material-ui/core/TableHead';
 import TableRow from '@material-ui/core/TableRow';
 import Paper from '@material-ui/core/Paper';
-
-const useStyles = makeStyles({
-    table: {
-        minWidth: 650,
-    },
-});
-function createData(name, calories, fat, carbs, protein) {
-    return { name, calories, fat, carbs, protein };
-}
-
-const rows = [
-    createData('Frozen yoghurt', 159, 6.0, 24, 4.0),
-    createData('Ice cream sandwich', 237, 9.0, 37, 4.3),
-    createData('Eclair', 262, 16.0, 24, 6.0),
-    createData('Cupcake', 305, 3.7, 67, 4.3),
-    createData('Gingerbread', 356, 16.0, 49, 3.9),
-];
+import AddPrescription from './AddPrescription'
+import ViewPrescription from './ViewPrescription'
 
 const Prescription = () => {
+    const [appointments, setAppointments] = useState([]);
+    useEffect(() => {
+        fetch('https://ro-doctors-portal.herokuapp.com/appointments').then(res => res.json()).then(data => {
+            setAppointments(data);
+        });
+    }, []);
+    console.log(setAppointments)
+    const currentAppointments = appointments.filter(appoint => appoint.prescription !== null);
+    console.log(currentAppointments)
+    const useStyles = makeStyles({
+        table: {
+            minWidth: 650,
+        },
+    });
     const classes = useStyles();
+
+    let count = 1;
+
     return (
-        <div>
-            <TableContainer component={Paper}>
+        <section className="PrescriptionPage">
+            <h4 style={{ fontSize: "20px" }}>Prescription</h4>
+
+            <TableContainer component={Paper} style={{ marginTop: "35px" }}>
+                <h3 className="colorPrimary" style={{ margin: "15px" }}>All Prescription</h3>
                 <Table className={classes.table} aria-label="simple table">
                     <TableHead>
                         <TableRow>
-                            <TableCell>Sr.No</TableCell>
-                            <TableCell align="right">Date</TableCell>
-                            <TableCell align="right">Name</TableCell>
-                            <TableCell align="right">Contact</TableCell>
-                            <TableCell align="right">Prescription</TableCell>
+                            <TableCell>Sr. No</TableCell>
+                            <TableCell>Date</TableCell>
+                            <TableCell>Name</TableCell>
+                            <TableCell>Contact</TableCell>
+                            <TableCell align="center">Prescription</TableCell>
                         </TableRow>
                     </TableHead>
                     <TableBody>
-                        {rows.map((row) => (
-                            <TableRow key={row.name}>
-                                <TableCell component="th" scope="row">
-                                    {row.name}
-                                </TableCell>
-                                <TableCell align="right">{row.calories}</TableCell>
-                                <TableCell align="right">{row.fat}</TableCell>
-                                <TableCell align="right">{row.carbs}</TableCell>
-                                <TableCell align="right">{row.protein}</TableCell>
+                        {
+                            currentAppointments.map(appointment => <TableRow key={appointment.name}>
+                                <TableCell component="th" scope="row">{count++}</TableCell>
+                                <TableCell><p style={{ maxWidth: "240px" }}>{appointment.date}</p></TableCell>
+                                <TableCell>{appointment.name}</TableCell>
+                                <TableCell>{appointment.phone}</TableCell>
+                                <TableCell align="center"><a href={"#view" + appointment._id} className='btn'>View</a></TableCell>
+
+                                <AddPrescription id={"add" + appointment._id} appointment={appointment}></AddPrescription>
+                                <ViewPrescription id={"view" + appointment._id} appointment={appointment}></ViewPrescription>
                             </TableRow>
-                        ))}
+                            )
+                        }
                     </TableBody>
                 </Table>
             </TableContainer>
-        </div>
+        </section>
     );
 };
 

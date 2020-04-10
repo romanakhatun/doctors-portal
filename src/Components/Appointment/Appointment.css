@@ -15,7 +15,7 @@
 .popupContent{
     width: 600px;
     text-align: center;
-    padding: 40px 0px;
+    padding: 5px 0px;
     background-color: #fff;
     box-shadow: 0 2rem 4rem rgba(#000, .2);
     position: absolute;
@@ -85,7 +85,7 @@
 .singleAppointment{   
     padding: 60px 70px;
     text-align: center;
-     box-shadow: 0px 0px 18px 3px #dddd;
+    box-shadow: 0px 0px 18px 3px #dddd;
 }
 .singleAppointment h3{
     color: #19D3B0;
@@ -96,7 +96,7 @@
 
 .appointmentForm input, .appointmentForm select{
     width: 90%;
-    padding: 15px;
+    padding: 13px 15px;
     border: 1px solid #ddd;
     border-radius: 5px;
     display: block;
@@ -104,27 +104,20 @@
 }
 .appointmentForm select{
     width: 100%;
-    padding: 14px;
+    padding: 11px 15px;
 }
 
 .twoChild{
     display: grid;
     grid-template-columns: repeat(2, 1fr);
 }
-.twoChild > select{
-    width: 90% !important;
-}
-.twoChild > input{
+.twoChild > *{
     width: 80% !important;
 }
-
 .threeChild{
     display: grid;
     grid-template-columns: repeat(3, 1fr);
 }
-.threeChild > select{
-    width: 87% !important;
-}
-.threeChild > input{
-    width: 72% !important;
+.threeChild > *{
+    width: 70% !important;
 }
