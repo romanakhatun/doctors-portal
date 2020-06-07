@@ -1,11 +1,10 @@
 # Doctors portal
 #### Doctors portal create with React, Firebase, Node, Hroku, Metarial UI, Bootstrap
 ### Main Featured:
-    Data picker
-    Patient Add
-    Pending
-    Approved
-    Prescription Add , View and Change
+    Data load from live database
+    Book Appointment for Patients
+    Doctors Dashboard to see all Patients, Appointments etc.
+    Update-able Appointments
     
 ### Unfavorable:
     No Responsive 
