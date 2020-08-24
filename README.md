@@ -1,5 +1,5 @@
 # Doctors portal
-#### Doctors portal create with React, Firebase, Node, Hroku, Metarial UI, Bootstrap
+#### Doctors portal create with React, Firebase, Node, Heroku, Metarial UI, Bootstrap
 ### Main Featured:
     Data load from live database
     Book Appointment for Patients
